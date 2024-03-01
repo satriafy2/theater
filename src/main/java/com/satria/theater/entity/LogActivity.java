@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class LogActivity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_log_activity")
     @SequenceGenerator(name = "seq_log_activity", sequenceName = "seq_log_activity", allocationSize = 1)

@@ -20,15 +20,15 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtService {
     
-    @Value("#{jwt.secret-string}")
+    @Value("${jwt.secret-string}")
     private String secretString;
 
-    @Value("#{jwt.expiration-minute}")
+    @Value("${jwt.expiration-minute}")
     private Integer expirationMinute;
 
-    public String generateToken(User user) {
+    public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, user.getUsername());
+        return createToken(claims, username);
     }
 
     private String createToken(Map<String, Object> claims, String username) {
@@ -70,8 +70,8 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) { 
-        final String username = extractUsername(token); 
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token)); 
+    public Boolean validateToken(String token, User user) { 
+        final String username = extractUsername(token);
+        return (username.equals(user.getUsername()) && !isTokenExpired(token)); 
     }
 }

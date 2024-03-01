@@ -4,18 +4,19 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user")
     @SequenceGenerator(name = "seq_user", sequenceName = "seq_user", allocationSize = 1)
@@ -23,8 +24,6 @@ public class User {
 
     @Column(length = 64)
     private String username;
-
-    @Column(length = 32)
     private String password;
 
     @Column(length = 128)
@@ -82,13 +81,11 @@ public class User {
     }
 
     public User(
-        Long id,
         String username,
         String password,
         String email,
         String phoneNumber
     ) {
-        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
